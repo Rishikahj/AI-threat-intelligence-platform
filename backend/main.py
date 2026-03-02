@@ -2,12 +2,21 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from typing import List
 
-app = FastAPI()
+# ✅ import router (NEW)
+from api.health import router as health_router
+
+app = FastAPI(title="Centralized AI Threat Intelligence Platform")
+
+# ✅ include router (NEW — VERY IMPORTANT)
+app.include_router(health_router)
+
 
 # -------- Root API --------
 @app.get("/")
 def read_root():
-    return {"message": "Centralized AI Threat Intelligence Platform is running"}
+    return {
+        "message": "Centralized AI Threat Intelligence Platform is running"
+    }
 
 
 # -------- IOC Model --------
@@ -64,12 +73,17 @@ def upload_ioc(ioc: IOC):
 @app.get("/iocs")
 def get_iocs():
     return ioc_database
+
+
 # -------- Dashboard Summary --------
 @app.get("/dashboard-summary")
 def dashboard_summary():
     total_iocs = len(ioc_database)
 
-    high_risk = [ioc for ioc in ioc_database if ioc.get("threat_score", 0) >= 75]
+    high_risk = [
+        ioc for ioc in ioc_database
+        if ioc.get("threat_score", 0) >= 75
+    ]
     high_risk_count = len(high_risk)
 
     avg_score = (
@@ -82,3 +96,4 @@ def dashboard_summary():
         "high_risk_iocs": high_risk_count,
         "average_threat_score": round(avg_score, 2)
     }
+    
