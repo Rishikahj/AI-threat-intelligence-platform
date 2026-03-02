@@ -117,19 +117,4 @@ http://127.0.0.1:8000/docs
 * 📈 Interactive frontend dashboard
 * 🌐 External threat intelligence feed integration
 
----
 
-## 👩‍💻 Author
-
-**Rishika H.J**
-B.Tech CSE (Cybersecurity)
-Frontend & Security Enthusiast
-
----
-
-## ⭐ Project Status
-
-* ✅ Backend implemented
-* ✅ IOC analysis working
-* ✅ Dashboard summary working
-* 🚧 Frontend enhancements in progress
